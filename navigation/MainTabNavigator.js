@@ -7,6 +7,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import LoginScreen2 from '../screens/LoginScreen2'
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -68,10 +70,44 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+
+
+
+
+const ExitStack = createStackNavigator(
+  {
+    LoginScreen: LoginScreen2,
+  },
+  config
+);
+
+ExitStack.navigationOptions = {
+  tabBarLabel: 'Logout',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon  name="md-options" onPress={() => this.props.navigation.navigate('Login')} />
+  ),
+};
+
+ExitStack.path = '';
+
+
+class ExitScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Settings!</Text>
+      </View>
+    );
+  }
+}
+
+
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+  ExitStack
 });
 
 tabNavigator.path = '';
